@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SALAMI CAI</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style></style>
+
+    <script src="FileSaver.js"></script>
+    <script>
+     function save(){
+      var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+FileSaver.saveAs(blob, "hello world.txt");
+     }
+    
+    </script>
+  </head>
+
+  <body>
+    <section class="main">
+      <h1>Salami Lagbe?</h1>
+      <form class="card container">
+      <div class="marakha justify-content-around">
+        <div class="marakha1 form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="paymentOption" id="paymentOption1" value="bkash" checked />
+          <label class="form-check-label" for="exampleRadios1"> Bkash </label>
+          <img class="optionimage bkash" src="images/bkash.svg" />
+        </div>
+        <div class="marakha1 form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="paymentOption" id="paymentOption2" value="rocket" />
+          <label class="form-check-label" for="exampleRadios2"> Rocket </label>
+          <img class="optionimage rocket" src="images/rocket.png" />
+        </div>
+        <div class="marakha1 form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="paymentOption" id="paymentOption3" value="nagad" />
+          <label class="form-check-label" for="exampleRadios2"> Nagad </label>
+          <img class="optionimage nagad" src="images/nagad.png" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputName" placeholder="Name" required />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputMobile" class="col-sm-2 col-form-label">Phone Number</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="inputMobile" placeholder="Phone Number" required />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputTaka" class="col-sm-2 col-form-label">You will get Taka</label>
+        <div class="col-sm-10">
+          <input id="inputTaka" readonly class="form-control-plaintext" />
+        </div>
+      </div>
+      <input class="btn btn-primary submit" type="submit" onclick="save()" value="Submit" id="btnSubmit" />
+    </form>
+
+      <div class="overlay"></div>
+      <div class="modalSurvey">
+        <div class="modalSurvey__container">
+          <div class="modalSurvey__close">&times;</div>
+          <h2 class="modalSurvey__congo">CONGRATULATIONS!</h2>
+          <h2 class="modalSurvey__name">MEHRAB</h2>
+          <h3 class="modalSurvey__text1">you win <span class="tk1">100</span></h3>
+          <img src="" class="myimage" alt="" />
+          <h3 class="tuimara_kha"><span class="b">INVOICE NUMBER : </span><span class="modalSurvey__invoice"></span></h3>
+          <h3 class="modalSurvey__mobile">MOBILE : <span class="p3">1223345</span></h3>
+          <div class="modalSurvey__confirm" onclick="myFunction()">CONFIRM</div>
+          <p>please click confirm to complete transaction.</p>
+          <p><span class="ast">*</span> terms and condition applied.</p>
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="http://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+      function validateForm(){
+        alert("hI")
+      } 
+      function myFunction() {
+        let timerInterval;
+        Swal.fire({
+          title: "Waiting for gateway response",
+          html: "Money will be transferred within <b></b> milliseconds.",
+          timer: 10000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            timerInterval = setInterval(() => {
+              const content = Swal.getContent();
+              if (content) {
+                const b = content.querySelector("b");
+                if (b) {
+                  b.textContent = Swal.getTimerLeft();
+                }
+              }
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("I was closed by the timer");
+            Swal.fire({
+              title: "Sweet!",
+              html: "There is nothing free in this world mate!</br><b>Wish you a very happy Eid</b>",
+              imageUrl: "images/eid_mubarak.cms",
+              imageWidth: 400,
+              imageHeight: 300,
+              imageAlt: "Eid Mubarak",
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
